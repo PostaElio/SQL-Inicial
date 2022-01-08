@@ -1,5 +1,5 @@
 # SQL-Inicial
-## Menú
+## Indice
 * Tema 1 - Manipulacion.
 	* [Ejercicios.](#tema-1---manipulacion)
 	* [Documentacion.](https://github.com/PostaElio/SQL-Inicial/blob/main/source/sql-manipulacion.pdf)
