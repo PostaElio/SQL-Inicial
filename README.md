@@ -2,7 +2,7 @@
 ## Menú
 * Tema 1 - Manipulacion.
 	* [Ejercicios.](#tema-1---manipulacion)
-	* [Documentacion.(https://github.com/PostaElio/SQL-Inicial/blob/main/source/sql-join.pdf)
+	* [Documentacion.](https://github.com/PostaElio/SQL-Inicial/blob/main/source/sql-join.pdf)
 * Tema 2 - Join.
 	* Documentacion.
 * Tema 3 - Queries.
