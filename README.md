@@ -64,13 +64,9 @@ UPDATE CURSO SET cupo = 25;
 ```
 ### Ejercicio 7
 ~~~
-Actualice, para todos los cursos, el cupo en 25.
+Elimine el curso Algoritmos
 ~~~
 ```sql
-UPDATE CURSO SET cupo = 25;
+DELETE FROM CURSO WHERE nombre = 'Algoritmos';
 ```
-
-
-
-DELETE FROM nombre_tabla WHERE condiciones;
 
