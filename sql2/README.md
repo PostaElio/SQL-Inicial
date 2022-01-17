@@ -7,7 +7,6 @@
 	* [Ejercicios.](#tema-2---multiples-tables)
 	* [Documentacion.](https://github.com/PostaElio/SQL-Inicial/blob/main/sql2/source/sql2-multiples-tables.pdf)
 * Tema 3 - Indices.
-	* [Ejercicios.](#tema-3---???)
 	* [Documentacion.](https://github.com/PostaElio/SQL-Inicial/blob/main/sql2/source/sql2-indices.pdf)
 * Tema 4 - Queries anidadas.
 	* [Ejercicios.](#tema-3---???)
@@ -91,8 +90,8 @@ INNER JOIN CURSO c ON i.CURSO_codigo = c.codigo
 ```
 ### Ejercicio 2:
 ~~~
-Nombre, apellido y cursos que realiza cada estudiante, ordenados por el nombre
-del curso
+Nombre, apellido y cursos que realiza cada estudiante, ordenados por el 
+nombre del curso
 ~~~
 ```sql
 SELECT e.nombre, e.apellido , c.nombre AS nombre_curso FROM ESTUDIANTE e
@@ -105,18 +104,17 @@ ORDER BY c.nombre
 Nombre, apellido y cursos que dicta cada profesor
 ~~~
 ```sql
-SELECT p.nombre , p.apellido, c.nombre AS nombre_curso FROM PROFESOR p INNER
-JOIN CURSO c ON p.id = c.PROFESOR_id 
+SELECT p.nombre , p.apellido, c.nombre AS nombre_curso FROM PROFESOR p 
+INNER JOIN CURSO c ON p.id = c.PROFESOR_id 
 ```
 ### Ejercicio 4:
 ~~~
-Nombre, apellido y cursos que dicta cada profesor, ordenados por el nombre del
-curso
+Nombre, apellido y cursos que dicta cada profesor, ordenados por el nombre 
+del curso
 ~~~
 ```sql
-SELECT p.nombre , p.apellido, c.nombre AS nombre_curso FROM PROFESOR p INNER
-JOIN CURSO c ON p.id = c.PROFESOR_id 
-ORDER BY c.nombre
+SELECT p.nombre , p.apellido, c.nombre AS nombre_curso FROM PROFESOR p 
+INNER JOIN CURSO c ON p.id = c.PROFESOR_id ORDER BY c.nombre
 ```
 ### Ejercicio 5:
 ~~~
@@ -127,8 +125,9 @@ inscriptos, el cupo disponible será 30)
 /*hacemos leftjoin para poder tener los campos null, ya que puede haber
 curos con ninguna inscripcion y en ese caso restariamos 0(null) por que 
 la fecha_hora del la inscripcion estaria null */
-SELECT c.codigo , c.cupo - COUNT(i.fecha_hora) AS cupo_disponible FROM CURSO c
-LEFT JOIN INSCRIPCION i ON c.codigo = i.CURSO_codigo GROUP BY c.codigo
+SELECT c.codigo , c.cupo - COUNT(i.fecha_hora) AS cupo_disponible FROM 
+CURSO c LEFT JOIN INSCRIPCION i ON c.codigo = i.CURSO_codigo 
+GROUP BY c.codigo
 ```
 ### Ejercicio 6:
 ~~~
@@ -136,79 +135,61 @@ Cursos cuyo cupo disponible sea menor a 10
 ~~~
 ```sql
 /*No puede haber HAVING sin GROUP BY*/
-SELECT * FROM CURSO 
-cupo es el cupo maximo CONST o
-es una variable que incrementa cuando se inscriben?
+SELECT c.codigo FROM CURSO c INNER JOIN INSCRIPCION i ON c.codigo = 
+i.CURSO_codigo GROUP BY c.codigo HAVING c.cupo - COUNT(i.fecha_hora) < 10
 ```
----
-## Tema 3 - Indices
-### Ejercicio 1:
-
-
 ---
 ## Tema 4 - Queries anidadas
 ### Ejercicio 1:
 ~~~
-Escriba una consulta que devuelva la cantidad de profesores que dictan más de un
-curso en el turno Noche.
+Escriba una consulta que devuelva la cantidad de profesores que dictan más 
+de un curso en el turno Noche.
 ~~~
 ```sql
-SELECT COUNT(*) AS cantidad_de_profesores_que_dictan_mas_de_un_curso_en_el_turno_noche
-FROM PROFESOR p INNER JOIN CURSO c ON p.id = c.PROFESOR_id WHERE c.turno = 'Noche'
-GROUP BY
-
-
-
-sELECT COUNT(*)
-from (
-     select profesor id, copunt(*)
-     from curso
-      where turno='noche'
-     group by profesor id
-      havoing count(*)>1
-
-)
-
+SELECT COUNT(DISTINCT PROFESOR_id) AS wea FROM CURSO WHERE turno = 'Noche' 
+GROUP BY PROFESOR_id HAVING count(*)>1;
 ```
 ### Ejercicio 2:
 ~~~
-Escriba una consulta para obtener la información de todos los estudiantes que no
-realizan
-el curso con código 105.
+Escriba una consulta para obtener la información de todos los estudiantes 
+que no realizan el curso con código 105.
 ~~~
 ```sql
-SELECT * FROM ESTUDIANTE WHERE legajo NOT IN (SELECT DISTINCT ESTUDIANTE_legajo 
-FROM INSCRIPCION WHERE CURSO_codigo = 105);
+SELECT * FROM ESTUDIANTE WHERE legajo NOT IN (SELECT DISTINCT 
+ESTUDIANTE_legajo FROM INSCRIPCION WHERE CURSO_codigo = 105);
 ```
 # Evaluacion Integral
 ## Ejercitacion I:
 ### Ejercicio 1:
 ~~~
-Escriba una consulta que devuelva el legajo y la cantidad de cursos que realiza cada
-estudiante.
+Escriba una consulta que devuelva el legajo y la cantidad de cursos que 
+realiza cada estudiante.
 ~~~
 ```sql
-/*Hacemos left join para obtener valores null, ya que un estudiante puede estar 
-inscripto en ningun cruso por el momento*/
-SELECT e.legajo, COUNT(i.CURSO_codigo) AS cantidad_de_cursos_inscripto FROM ESTUDIANTE e
-LEFT JOIN INSCRIPCION i ON e.legajo = i.ESTUDIANTE_legajo GROUP BY e.legajo;
+/*Hacemos left join para obtener valores null, ya que un estudiante puede 
+estar inscripto en ningun cruso por el momento*/
+SELECT e.legajo, COUNT(i.CURSO_codigo) AS cantidad_de_cursos_inscripto 
+FROM ESTUDIANTE e LEFT JOIN INSCRIPCION i 
+ON e.legajo = i.ESTUDIANTE_legajo GROUP BY e.legajo;
 ```
 ### Ejercicio 2:
 ~~~
-Escriba una consulta que devuelva el legajo y la cantidad de cursos de los estudiantes que
-realizan más de un curso.
+Escriba una consulta que devuelva el legajo y la cantidad de cursos de los 
+estudiantes que realizan más de un curso.
 ~~~
 ```sql
-/*Va con un having*/
-SELECT e.legajo, COUNT 
+SELECT ESTUDIANTE_legajo, COUNT(CURSO_codigo) AS 
+cantidad_de_cursos_que_realaliza FROM INSCRIPCION 
+GROUP BY ESTUDIANTE_legajo HAVING COUNT(CURSO_codigo) > 1
 ```
 ### Ejercicio 3:
 ~~~
-Escriba una consulta que devuelva la información de los estudiantes que no realizan ningún
-curso.
+Escriba una consulta que devuelva la información de los estudiantes que no 
+realizan ningún curso.
 ~~~
 ```sql
-SELECT * FROM ESTUDIANTE WHERE legajo NOT IN (SELECT ESTUDIANTE_legajo FROM INSCRIPCION);
+SELECT * FROM ESTUDIANTE WHERE legajo NOT IN 
+(SELECT DISTINCT ESTUDIANTE_legajo FROM INSCRIPCION);
 ```
 ### Ejercicio 4:
 ~~~
@@ -262,7 +243,3 @@ INNER JOIN CURSO c ON i.CURSO_codigo = c.codigo
 INNER JOIN PROFESOR p ON p.id = c.PROFESOR_id 
 WHERE p.apellido IN ('Pérez','Paz'));
 ```
-
-
-
-
