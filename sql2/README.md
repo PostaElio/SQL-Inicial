@@ -9,7 +9,7 @@
 * Tema 3 - Indices.
 	* [Documentacion.](https://github.com/PostaElio/SQL-Inicial/blob/main/sql2/source/sql2-indices.pdf)
 * Tema 4 - Queries anidadas.
-	* [Ejercicios.](#tema-3---???)
+	* [Ejercicios.](#tema-4---queries-anidadas)
 	* [Documentacion.](https://github.com/PostaElio/SQL-Inicial/blob/main/sql2/source/sql2-queries-anidadas.pdf)
 
 ---
