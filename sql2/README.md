@@ -11,6 +11,8 @@
 * Tema 4 - Queries anidadas.
 	* [Ejercicios.](#tema-4---queries-anidadas)
 	* [Documentacion.](https://github.com/PostaElio/SQL-Inicial/blob/main/sql2/source/sql2-queries-anidadas.pdf)
+* Evaluacion integral.
+	* [Ejercicios.](#evaluacion-integral)
 
 ---
 ## Tema 1 - Funciones agregadas
